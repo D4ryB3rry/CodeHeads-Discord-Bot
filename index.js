@@ -16,7 +16,7 @@ bot.on("ready", function() {
     bot.user.setPresence({
         game: {
           name: '$help',
-          type: 1
+          type: 'WATCHING'
         },
         status: 'online'
       }).catch(console.error);
