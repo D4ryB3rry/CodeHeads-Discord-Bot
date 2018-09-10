@@ -43,6 +43,15 @@ bot.on("message", function(message){
         return;
     }
 
+    if(message.mentions.members.array().length >= 1){
+        for(member in message.mentions.members.array()){
+            if(message.mentions.members.array()[member].user == bot.user){
+                message.reply(' Help Placeholder')
+            }
+        }
+        
+    }
+
     switch (args[0]) {
         case "ping":
             message.channel.send("Der Pong liegt bei " + Math.round(bot.ping) + "ms")
