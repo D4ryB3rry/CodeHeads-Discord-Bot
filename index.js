@@ -39,7 +39,7 @@ bot.on("message", function(message){
             break;
         case "info":
             tools.send_embed({
-                color: standards.embed.colors.general,
+                color: 0xffee00,
                 fields: [
                     {
                         name: 'Info',
