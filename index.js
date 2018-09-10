@@ -73,47 +73,51 @@ bot.on("message", async function(message){
             }, message)
             break;
         case "ban":
-            let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
-            if(!user) return message.channel.send("    Ich konnte diesen User nicht finden!");
-            if(!args[0]) return message.channel.send("Bitte den Grund mit nennen.");
+            if(message.mentions.members.array()[0]){
+                let member = message.mentions.members.array()[0];
+            }else{
+                message.channel.send("Ich konnte diesen User nicht finden!");
+                return
+            }
+            //if(!args[2]) return message.channel.send("Bitte den Grund mit nennen.");
 
             tempArray = args
-            tempArray.shift(2)
-
+            tempArray.shift().shift()
             let bReason = tempArray.join(" ")
-            if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt");
-            if(user.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!");
-            message.guild.member(user).ban(bReason); 
 
-            let reportChannel = bot.channels.get(channels.reports)
+            //if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt");
+            //if(user.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!");
+            //message.guild.member(user).ban(bReason); 
 
+            //let reportChannel = bot.channels.get(channels.reports)
+            //reportChannel.send('hi')
             tools.send_embed({
                 color: 0xff1133,
                 description: '~Ban~',
                 fields: [
                     {
                         name: 'Banned User:',
-                        value: `${user} mit ID: ${user.id}`
+                        value: `{member.user.username} mit ID: {member.user.id}`
                     },
                     {
                         name: 'Banned Von:',
-                        value: `<@${message.author.id}> mit ID: ${message.author.id}`
+                        value: `<@{message.author.username}> mit ID: {message.author.id}`
                     },
                     {
                         name: 'Banned In:',
-                        value: message.channel
+                        value: "message.channel.name"
                     },
                     {
                         name: 'Time:',
-                        value: message.createdAt
+                        value: "message.createdAt"
                     },
                     {
                         name: 'Reason:',
-                        value: bReason
+                        value: "bReason"
                     }
                 ]
-            }, message, reportChannel)
-            if(!reportChannel) return message.channel.send("Konnte den reports-channel nicht finden.");
+            }, message)
+            break;
     }
 });
 
