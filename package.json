@@ -21,5 +21,15 @@
     "uws": "^99.0.0",
     "youtube-info": "^1.2.0",
     "ytdl-core": "^0.25.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Xenorio/CodeHeads-Discord-Bot.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Xenorio/CodeHeads-Discord-Bot/issues"
+  },
+  "homepage": "https://github.com/Xenorio/CodeHeads-Discord-Bot#readme"
 }
