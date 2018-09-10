@@ -15,12 +15,12 @@ var bot = new discord.Client();
 bot.on("ready", function() {
     bot.user.setPresence({
         game: {
-          name: config.general.playing,
+          name: '$help',
           type: 1
         },
         status: 'online'
       }).catch(console.error);
-      
+
     console.log("Bot is ready")
   });
 
