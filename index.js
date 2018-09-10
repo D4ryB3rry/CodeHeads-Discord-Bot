@@ -81,9 +81,10 @@ bot.on("message", async function(message){
             }
             //if(!args[2]) return message.channel.send("Bitte den Grund mit nennen.");
 
-            tempArray = args
-            tempArray.shift().shift()
-            let bReason = tempArray.join(" ")
+            //tempArray = args
+            //tempArray.shift().shift()
+            //let bReason = tempArray.join(" ")
+            let bReason = "test"
 
             //if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt");
             //if(user.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!");
@@ -97,23 +98,23 @@ bot.on("message", async function(message){
                 fields: [
                     {
                         name: 'Banned User:',
-                        value: `{member.user.username} mit ID: {member.user.id}`
+                        value: `${member.user.username} mit ID: ${member.user.id}`
                     },
                     {
                         name: 'Banned Von:',
-                        value: `<@{message.author.username}> mit ID: {message.author.id}`
+                        value: `<@${message.author.username}> mit ID: ${message.author.id}`
                     },
                     {
                         name: 'Banned In:',
-                        value: "message.channel.name"
+                        value: message.channel.name
                     },
                     {
                         name: 'Time:',
-                        value: "message.createdAt"
+                        value: message.createdAt
                     },
                     {
                         name: 'Reason:',
-                        value: "bReason"
+                        value: bReason
                     }
                 ]
             }, message)
