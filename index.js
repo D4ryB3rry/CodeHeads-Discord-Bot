@@ -13,6 +13,14 @@ const prefix = configGeneral.prefix
 var bot = new discord.Client();
 
 bot.on("ready", function() {
+    bot.user.setPresence({
+        game: {
+          name: config.general.playing,
+          type: 1
+        },
+        status: 'online'
+      }).catch(console.error);
+      
     console.log("Bot is ready")
   });
 
