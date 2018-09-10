@@ -74,7 +74,9 @@ bot.on("message", async function(message){
             break;
         case "ban":
             if(message.mentions.members.array()[0]){
+                console.log(message.mentions.members.array()[0].username)
                 let member = message.mentions.members.array()[0];
+                console.log('UWU: ' + member.id + '   ' + member.username)
             }else{
                 message.channel.send("Ich konnte diesen User nicht finden!");
                 return
@@ -98,11 +100,11 @@ bot.on("message", async function(message){
                 fields: [
                     {
                         name: 'Banned User:',
-                        value: `${member.user.username} mit ID: ${member.user.id}`
+                        value: "member mit ID: " + member.id
                     },
                     {
                         name: 'Banned Von:',
-                        value: `<@${message.author.username}> mit ID: ${message.author.id}`
+                        value: `<@{message.author.username}> mit ID: ${message.author.id}`
                     },
                     {
                         name: 'Banned In:',
