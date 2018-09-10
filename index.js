@@ -89,7 +89,7 @@ bot.on("message", async function(message){
             if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt").then(message => message.delete(4000));
             if(member.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!").then(message => message.delete(4000));
 
-            let reportChannel = bot.channels.get(channels.reports)
+            let banChannel = bot.channels.get(channels.reports)
             //reportChannel.send('hi')
             tools.send_embed({
                 color: 0xff1133,
@@ -105,7 +105,7 @@ bot.on("message", async function(message){
                     },
                     {
                         name: 'Banned In:',
-                        value: message.channel.name
+                        value: '<#' + message.channel.id + '>'
                     },
                     {
                         name: 'Time:',
@@ -116,57 +116,7 @@ bot.on("message", async function(message){
                         value: bReason
                     }
                 ]
-            }, message, reportChannel)
-
-            message.delete().catch(O_o=>{})
-
-            message.guild.member(member).ban(bReason); 
-            break;
-        case "ban":
-            if(!message.mentions.members.array()[0]){
-                message.channel.send("Ich konnte diesen User nicht finden!").then(message => message.delete(4000));
-                return;
-            }
-            if(!args[2]) return message.channel.send("Bitte den Grund mit nennen.").then(message => message.delete(4000));
-
-            let tempArray = args
-            tempArray.shift()
-            tempArray.shift()
-            let bReason = tempArray.join(" ")
-
-            let member = message.mentions.members.array()[0];
-
-            if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt").then(message => message.delete(4000));
-            if(member.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!").then(message => message.delete(4000));
-
-            let reportChannel = bot.channels.get(channels.reports)
-            //reportChannel.send('hi')
-            tools.send_embed({
-                color: 0xff1133,
-                description: '~Ban~',
-                fields: [
-                    {
-                        name: 'Banned User:',
-                        value: '<@' + member.id + "> mit ID: " + member.id
-                    },
-                    {
-                        name: 'Banned Von:',
-                        value: `<@${message.author.id}> mit ID: ${message.author.id}`
-                    },
-                    {
-                        name: 'Banned In:',
-                        value: message.channel.name
-                    },
-                    {
-                        name: 'Time:',
-                        value: message.createdAt
-                    },
-                    {
-                        name: 'Reason:',
-                        value: bReason
-                    }
-                ]
-            }, message, reportChannel)
+            }, message, banChannel)
 
             message.delete().catch(O_o=>{})
 
@@ -179,33 +129,33 @@ bot.on("message", async function(message){
             }
             if(!args[2]) return message.channel.send("Bitte den Grund mit nennen.").then(message => message.delete(4000));
 
-            let tempArray = args
-            tempArray.shift()
-            tempArray.shift()
-            let bReason = tempArray.join(" ")
+            let tmpArray = args
+            tmpArray.shift()
+            tmpArray.shift()
+            let kReason = tmpArray.join(" ")
 
-            let member = message.mentions.members.array()[0];
+            let kmember = message.mentions.members.array()[0];
 
-            if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt").then(message => message.delete(4000));
-            if(member.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!").then(message => message.delete(4000));
+            if(!message.member.hasPermission("KICK_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt").then(message => message.delete(4000));
+            if(kmember.hasPermission("KICK_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!").then(message => message.delete(4000));
 
-            let reportChannel = bot.channels.get(channels.reports)
+            let kickChannel = bot.channels.get(channels.reports)
             //reportChannel.send('hi')
             tools.send_embed({
                 color: 0xff1133,
-                description: '~Ban~',
+                description: '~Kick~',
                 fields: [
                     {
-                        name: 'Banned User:',
-                        value: '<@' + member.id + "> mit ID: " + member.id
+                        name: 'Kicked User:',
+                        value: '<@' + kmember.id + "> mit ID: " + kmember.id
                     },
                     {
-                        name: 'Banned Von:',
+                        name: 'Kicked Von:',
                         value: `<@${message.author.id}> mit ID: ${message.author.id}`
                     },
                     {
-                        name: 'Banned In:',
-                        value: message.channel.name
+                        name: 'Kicked In:',
+                        value: '<#' + message.channel.id + '>'
                     },
                     {
                         name: 'Time:',
@@ -213,14 +163,59 @@ bot.on("message", async function(message){
                     },
                     {
                         name: 'Reason:',
-                        value: bReason
+                        value: kReason
+                    }
+                ]
+            }, message, kickChannel)
+
+            message.delete().catch(O_o=>{})
+
+            message.guild.member(kmember).kick(kReason); 
+            break;
+        case "report":
+            if(!message.mentions.members.array()[0]){
+                message.channel.send("Ich konnte diesen User nicht finden!").then(message => message.delete(4000));
+                return;
+            }
+            if(!args[2]) return message.channel.send("Bitte den Grund mit nennen.").then(message => message.delete(4000));
+
+            let tmpArrayReport = args
+            tmpArrayReport.shift()
+            tmpArrayReport.shift()
+            let rReason = tmpArrayReport.join(" ")
+
+            let rmember = message.mentions.members.array()[0];
+
+            let reportChannel = bot.channels.get(channels.reports)
+            //reportChannel.send('hi')
+            tools.send_embed({
+                color: 0xff1133,
+                description: '~Report~',
+                fields: [
+                    {
+                        name: 'Reported User:',
+                        value: '<@' + rmember.id + "> mit ID: " + rmember.id
+                    },
+                    {
+                        name: 'Reported Von:',
+                        value: `<@${message.author.id}> mit ID: ${message.author.id}`
+                    },
+                    {
+                        name: 'Reported In:',
+                        value: '<#' + message.channel.id + '>'
+                    },
+                    {
+                        name: 'Time:',
+                        value: message.createdAt
+                    },
+                    {
+                        name: 'Reason:',
+                        value: rReason
                     }
                 ]
             }, message, reportChannel)
 
             message.delete().catch(O_o=>{})
-
-            //message.guild.member(member).ban(bReason); 
             break;
     }
 });
