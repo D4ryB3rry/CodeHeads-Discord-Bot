@@ -6,6 +6,7 @@ const tools = require("./misc/tools.js")
 const discordcreds = JSON.parse(fs.readFileSync('configs/discordcreds.json', 'utf-8'))
 const configGeneral = JSON.parse(fs.readFileSync('configs/general.json', 'utf-8'))
 const standards = JSON.parse(fs.readFileSync('configs/standards.json', 'utf-8'))
+const channels = JSON.parse(fs.readFileSync('configs/channels.json', 'utf-8'))
 
 const token = discordcreds.token
 const prefix = configGeneral.prefix
@@ -24,7 +25,7 @@ bot.on("ready", function() {
     console.log("Bot is ready")
   });
 
-bot.on("message", function(message){
+bot.on("message", async function(message){
     if (message.author == bot.user) {
         return;
       }
@@ -71,6 +72,48 @@ bot.on("message", function(message){
                 ]
             }, message)
             break;
+        case "ban":
+            let user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]));
+            if(!user) return message.channel.send("    Ich konnte diesen User nicht finden!");
+            if(!args[0]) return message.channel.send("Bitte den Grund mit nennen.");
+
+            tempArray = args
+            tempArray.shift(2)
+
+            let bReason = tempArray.join(" ")
+            if(!message.member.hasPermission("BAN_MEMBERS")) return message.channel.send("Dazu bist du nicht berechtigt");
+            if(user.hasPermission("BAN_MEMBERS")) return message.channel.send("Diesen User kann ich nicht bannen!");
+            message.guild.member(user).ban(bReason); 
+
+            let reportChannel = bot.channels.get(channels.reports)
+
+            tools.send_embed({
+                color: 0xff1133,
+                description: '~Ban~',
+                fields: [
+                    {
+                        name: 'Banned User:',
+                        value: `${user} mit ID: ${user.id}`
+                    },
+                    {
+                        name: 'Banned Von:',
+                        value: `<@${message.author.id}> mit ID: ${message.author.id}`
+                    },
+                    {
+                        name: 'Banned In:',
+                        value: message.channel
+                    },
+                    {
+                        name: 'Time:',
+                        value: message.createdAt
+                    },
+                    {
+                        name: 'Reason:',
+                        value: bReason
+                    }
+                ]
+            }, message, reportChannel)
+            if(!reportChannel) return message.channel.send("Konnte den reports-channel nicht finden.");
     }
 });
 
