@@ -1,3 +1,4 @@
 **/node_modules
 configs/discordcreds.json
 configs/channels.json
+fetch.py

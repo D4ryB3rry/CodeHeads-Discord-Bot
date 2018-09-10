@@ -33,10 +33,17 @@ bot.on("message", function(message){
     args = message.content.substring(prefix.length).split(" ");
     argsStr = message.content.substring(prefix.length).substring(msg.indexOf(" ") + 1);
 
+    if (message.content.toLowerCase() == "lol"){
+            message.channel.send('rofl')
+            return;
+    }
+
+    if (message.content.toLowerCase() == "rofl"){
+        message.channel.send('lol')
+        return;
+    }
+
     switch (args[0]) {
-        case "lol":
-            message.reply('rofl')
-            break;
         case "ping":
             message.channel.send("Der Pong liegt bei " + Math.round(bot.ping) + "ms")
             break;
