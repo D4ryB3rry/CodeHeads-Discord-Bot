@@ -35,7 +35,7 @@ bot.on("message", function(message){
 
     switch (args[0]) {
         case "ping":
-            message.reply(" Pong!")
+            message.reply("Pong! Latenz liegt bei ${m.createdTimestamp - message.createdTimestamp}ms. API Latenz liegt bei ${Math.round(client.ping)}ms")
             break;
         case "info":
             tools.send_embed({
