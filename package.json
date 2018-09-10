@@ -1,0 +1,25 @@
+{
+  "name": "mainbot",
+  "version": "1.0.0",
+  "description": "CodeHeads Main Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Xenorio",
+  "license": "MIT",
+  "dependencies": {
+    "bufferutil": "^4.0.0",
+    "discord.js": "^11.4.2",
+    "erlpack": "github:discordapp/erlpack",
+    "fs": "0.0.1-security",
+    "get-youtube-id": "^1.0.0",
+    "libsodium-wrappers": "^0.7.3",
+    "node-datetime": "^2.1.0",
+    "node-opus": "^0.3.0",
+    "opusscript": "0.0.6",
+    "uws": "^99.0.0",
+    "youtube-info": "^1.2.0",
+    "ytdl-core": "^0.25.2"
+  }
+}
