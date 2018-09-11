@@ -9,18 +9,17 @@ A. Discord-Bot for the codeheads community.
  /Description
 
 
-  -  This is an Bot for a DiscordServer who is in development stadium.
-  -  We are building a Bot for Discord who will be able to react with
-multiple functions.
-     They will be:
-
+  - This is an Bot for a DiscordServer, which is in development stadium.
+  - We are building a Bot for Discord which will be able to react with multiple functions. 
+    
+    There will be:
+    
       ->Music PlugIn
       ->Moderative Commands
       ->BadWords Filter
-      ->AnEmbed with any ServerInfos / MemberInfos / RoleInfos
-      ->
+      ->An embed with any ServerInfos / MemberInfos / RoleInfos
 
-  - We are working at it as fast as we can to get him ready to use in Server.
+  - We are working at it as fast as we can, to get him ready to use in our server.
 
 ---------------------------------------------------------------------------------------------------------------------
 
